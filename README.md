@@ -104,6 +104,30 @@ Finally, start the dashboard server:
 
 Now you can browse the dashboard at `http://localhost:3030/default`.
 
+## Usage with Docker
+
+### Building the Image
+	docker build -t username/imageName .
+	
+Where `username` is your Docker Hub ID and `imageName` is the tag.
+
+### Running the image
+
+	docker run --rm --name dash-o -p 80:3030 -v $(pwd)/env:/dash/.env romant/dash-o
+	
+
+> where `env` is your copy of the .env.sample with your own GitHub credentials.
+
+My `env` looks something like this
+
+```
+ORGAS=YOUR_ORG
+SINCE=12.months.ago.beginning_of_month
+GITHUB_LOGIN=YOUR_USERNAME
+GITHUB_OAUTH_TOKEN=YOUR_TOKEN
+LEADERBOARD_WEIGHTING=issues_opened=5,issues_closed=5,pulls_opened=10,pulls_closed=5,pulls_comments=1,issues_comments=1,commits_comments=1,commits=20
+```
+
 ## Tasks
 
 The Dashing jobs query for their data whenever the server is started, and then with a frequency of 1h by default. 
